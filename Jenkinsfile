@@ -1,15 +1,16 @@
+
 pipeline{
     agent any 
+        environments {
+            NEW_VERSION = '1.3.5'
+        }
         stages{
 
             stage ("build"){
-                // when {
-                //     expression{
-                //         BRANCH_NAME == 'master' && CODE_CHANGES == true
-                //     }
-                // }
+
                 steps {
                     echo "Build the application app_name"
+                    echo "The new version for this app is ${NEW_VERSION}"
                 }
             }
 
