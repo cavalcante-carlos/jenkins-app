@@ -1,4 +1,4 @@
-CODE_CHANGES = getGitChanges()
+//  Prject in the branch dev
 
 pipeline{
     agent any 
