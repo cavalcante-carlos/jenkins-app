@@ -14,11 +14,6 @@ pipeline{
             }
             }
             stage ("test"){
-                    when {
-                        expression {
-                            CODE_CHANGES == 'master'
-                        }
-                    }
                 steps {
                     echo "Testing the application app_name"
             }
