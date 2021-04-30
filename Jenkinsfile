@@ -3,7 +3,7 @@ pipeline{
     agent any 
     environment {
         NEW_VERSION = '1.3.5'
-        SERVER_CREDENTIALS = credentials('server-credentials')
+        // SERVER_CREDENTIALS = credentials('server-credentials')
         maven 'Maven'
     }
     stages{
@@ -31,11 +31,11 @@ pipeline{
         stage ("deploy"){
             steps {
                 echo "Deploying the application app_name"
-                withCredentials([
-                    usernamePassword(credentials: 'server-credentials', usernameVariable: USER, passwordVariable: PWD)
-                    ]){
-                    sh "Some script ${USER} ${PWD}"
-                }
+                // withCredentials([
+                //     usernamePassword(credentials: 'server-credentials', usernameVariable: USER, passwordVariable: PWD)
+                //     ]){
+                //     sh "Some script ${USER} ${PWD}"
+                // }
             }
         }
     }
