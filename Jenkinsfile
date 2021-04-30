@@ -14,7 +14,7 @@ pipeline{
 
             steps {
                 echo "Build the application app_name"
-                sh "mvn install"
+                echo "mvn install"
                 echo "The new version for this app is ${NEW_VERSION}"
             }
         }
