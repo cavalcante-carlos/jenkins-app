@@ -3,6 +3,7 @@ pipeline{
     agent any 
         environment {
             NEW_VERSION = '1.3.5'
+            SERVER_CREDENTIALS = credentials('server-credentials')
         }
         stages{
 
@@ -28,6 +29,8 @@ pipeline{
             stage ("deploy"){
                 steps {
                     echo "Deploying the application app_name"
+                    echo "deploying with ${SERVER_CREDENTIALS}"
+                    sh "${SERVER_CREDENTIALS}"
                 }
             }
 
