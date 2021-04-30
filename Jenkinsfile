@@ -4,7 +4,6 @@ pipeline{
     environment {
         NEW_VERSION = '1.3.5'
         SERVER_CREDENTIALS = credentials('server-credential')
-        maven 'Maven'
     }
     stages{
 
@@ -13,7 +12,6 @@ pipeline{
             steps {
                 echo "Build the application app_name"
                 echo "The new version for this app is ${NEW_VERSION}"
-                sh "mvn install"
             }
         }
 
