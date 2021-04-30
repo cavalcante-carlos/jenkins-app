@@ -1,32 +1,38 @@
-//  Prject in the branch dev
 
 pipeline{
     agent any 
-        stages{
-            stage ("build"){
-                when {
-                    expression{
-                        CODE_CHANGES == 'master' && CODE_CHANGES == true
-                    }
-                }
-                steps {
-                    echo "Build the application app_name"
-            }
-            }
-            stage ("test"){
-                    when {
-                        expression {
-                            CODE_CHANGES == 'master'
-                        }
-                    }
-                steps {
-                    echo "Testing the application app_name"
-            }
-            }
-            stage ("deploy"){
-                steps {
-                    echo "Deploying the application app_name"
-            }
+    environment {
+        NEW_VERSION = '1.3.5'
+        SERVER_CREDENTIALS = credentials('server-credentials')
+    }
+    stages{
+
+        stage ("build"){
+
+            steps {
+                echo "Build the application app_name"
+                echo "The new version for this app is ${NEW_VERSION}"
             }
         }
+
+        stage ("test"){
+                when {
+                    expression {
+                        BRANCH_NAME == 'master'
+                    }
+                }
+            steps {
+                echo "Testing the application app_name"
+            }
+        }
+
+        stage ("deploy"){
+            steps {
+                echo "Deploying the application app_name"
+                wichCredentials([usernamePassword(credentials: 'server-credentials', usernameVariable: USER, passwordVariable: PWD)]){
+                    sh "Some script ${USER} and ${PWD}"
+                }
+            }
+        }
+    }
 }
