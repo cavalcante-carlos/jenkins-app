@@ -2,8 +2,7 @@
 pipeline{
     agent any 
     parameters{
-        // string(name: 'VERSION', defaultValue: '', description: 'version to deploy on prod')
-        choice(name: 'VERSION', choices : ['1.1.0', '1.2.0', '1.3.0'] , description: 'Yes, it is working' )
+        choice( name: 'VERSION', choices : ['1.1.0', '1.2.0', '1.3.0'] , description: 'Yes, it is working' )
         booleanParam(name: 'executeTests', defaultValue: true, description: 'Yes, it is working heheheh' )
     }
     tools {
@@ -25,11 +24,11 @@ pipeline{
         }
 
         stage ("test"){
-                when {
-                    expression {
-                        BRANCH_NAME == 'dev'
-                    }
-                }
+                // when {
+                //     expression {
+                //         BRANCH_NAME == 'dev'
+                //     }
+                // }
                 when {
                     expression {
                         params.executeTests
