@@ -4,6 +4,7 @@ pipeline{
     environment {
         NEW_VERSION = '1.3.5'
         SERVER_CREDENTIALS = credentials('server-credentials')
+        maven 'Maven'
     }
     stages{
 
@@ -12,6 +13,7 @@ pipeline{
             steps {
                 echo "Build the application app_name"
                 echo "The new version for this app is ${NEW_VERSION}"
+                sh "mvn install"
             }
         }
 
@@ -29,8 +31,10 @@ pipeline{
         stage ("deploy"){
             steps {
                 echo "Deploying the application app_name"
-                wichCredentials([usernamePassword(credentials: 'server-credentials', usernameVariable: USER, passwordVariable: PWD)]){
-                    sh "Some script ${USER} and ${PWD}"
+                withCredentials([
+                    usernamePassword(credentials: 'server-credentials', usernameVariable: USER, passwordVariable: PWD)
+                    ]){
+                    sh "Some script ${USER} ${PWD}"
                 }
             }
         }
